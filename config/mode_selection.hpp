@@ -53,8 +53,7 @@ void select_mode(CommunicationBackend *backend) {
             set_mode(backend, new FgcMode(socd::SOCD_NEUTRAL));
         } else if (inputs.b) {
             set_mode(backend, new RivalsOfAether(socd::SOCD_2IP));
-        }
-        else if (inputs.up2) {
+        } else if (inputs.up2) {
             set_mode(backend, new MeleeWASD(socd::SOCD_2IP));
         }
     } else if (inputs.mod_y && !inputs.mod_x && inputs.start) {

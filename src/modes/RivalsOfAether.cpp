@@ -8,10 +8,9 @@ RivalsOfAether::RivalsOfAether(socd::SocdType socd_type) : ControllerMode(socd_t
     _socd_pair_count = 4;
     _socd_pairs = new socd::SocdPair[_socd_pair_count]{
         socd::SocdPair{&InputState::left,    &InputState::right  },
-        socd::SocdPair{ &InputState::down,   &InputState::up     },
+        socd::SocdPair{ &InputState::down,   &InputState::up_pressed   },
         socd::SocdPair{ &InputState::c_left, &InputState::c_right},
-        socd::SocdPair{ &InputState::c_down, &InputState::c_up   },
-        socd::SocdPair{ &InputState::down,   &InputState::up2    }
+        socd::SocdPair{ &InputState::c_down, &InputState::c_up   }    
     };
 }
 
@@ -48,12 +47,12 @@ void RivalsOfAether::UpdateDigitalOutputs(InputState &inputs, OutputState &outpu
 
 void RivalsOfAether::UpdateAnalogOutputs(InputState &inputs, OutputState &outputs) {
     // Coordinate calculations to make modifier handling simpler.
-    bool up_button_pressed = inputs.up || inputs.up2;
+    inputs.up_pressed = inputs.up || inputs.up2;
     UpdateDirections(
         inputs.left,
         inputs.right,
         inputs.down,
-        up_button_pressed,
+        inputs.up_pressed,
         inputs.c_left,
         inputs.c_right,
         inputs.c_down,
